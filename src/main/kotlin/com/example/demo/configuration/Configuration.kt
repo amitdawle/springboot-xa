@@ -13,30 +13,73 @@ import javax.sql.DataSource
 
 @Configuration
 class Configuration {
-
+    
+   /*
+    From application.yml,
+    spring:
+      jta:
+        datasource:
+          accounts:
+    
+   */
     @Bean(name = ["jdbcTemplateAccounts"])
     fun jdbcTemplateAccounts(@Qualifier("accounts") ds: DataSource?): JdbcTemplate? {
         return ds?.let { JdbcTemplate(it) }
     }
 
-
+  /*
+    From application.yml,
+    spring:
+      jta:
+        datasource:
+          boolings:
+    
+   */
     @Bean(name = ["jdbcTemplateBookings"])
     fun jdbcTemplateBookings(@Qualifier("bookings") ds: DataSource?): JdbcTemplate? {
         return ds?.let { JdbcTemplate(it) }
     }
 
+    /*
+    Configuration in application.yml under
+    
+    spring:
+      jta:
+        datasource:
+          bookings:
+         ...
+    */
     @Bean
     @ConfigurationProperties(prefix = "spring.jta.atomikos.datasource.bookings")
     fun dataSourceBookings(): DataSource? {
         return AtomikosDataSourceBean()
     }
 
+     /*
+    Configuration in application.yml under
+    
+    spring:
+      jta: 
+        datasource:
+          accounts:
+         ...
+    */
     @Bean
     @ConfigurationProperties(prefix = "spring.jta.atomikos.datasource.accounts")
     fun dataSourceAccounts(): DataSource? {
         return AtomikosDataSourceBean()
     }
 
+     /*
+    Configuration in application.yml under
+    
+    spring:
+      jta:
+        atomikos:
+          connectionfactory:
+            notifications:
+         ...
+    */
     @Bean
     @ConfigurationProperties(prefix = "spring.jta.atomikos.connectionfactory.notifications")
     fun activeMq(): AtomikosConnectionFactoryBean {
