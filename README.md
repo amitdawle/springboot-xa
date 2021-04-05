@@ -1,6 +1,6 @@
 # springboot-xa
 
-A simple (albeit contrived) example showing how to use configure multiple resources with Atomikos when using spring boot. The demo application writes to two databases (in memory) and one messaging resource (ActiveMQ) in a single (XA) transaction. 
+A simple (albeit contrived) example showing how to use configure multiple resources with Atomikos when using spring boot. The demo application writes to two databases (in memory) and one messaging resource (ActiveMQ) in a single (XA) transaction. For those in rush, main configuration is in[Configuration.kt](https://github.com/amitdawle/springboot-xa/blob/main/src/main/kotlin/com/example/demo/configuration/Configuration.kt) and in [application.yaml](https://github.com/amitdawle/springboot-xa/blob/main/src/main/resources/application.yml).
 
 This setup is useful for monoliths or if you are in process of gradually [migrating](https://martinfowler.com/bliki/StranglerFigApplication.html) a monolith to microsevices architecture with spring boot and want to initially do XA in a single microservice.
 
