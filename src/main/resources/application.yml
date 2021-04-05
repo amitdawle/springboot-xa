@@ -1,0 +1,44 @@
+spring:
+  jta:
+    enabled: true
+    max-actives: 200
+    enable-logging: false
+
+    atomikos:
+      connectionfactory:
+        notifications:
+          ignore-session-transacted-flag: false
+          local-transaction-mode: false
+          unique-resource-name: xa.amq
+          min-pool-size: 10
+          max-pool-size: 20
+          xa-connection-factory-class-name : org.apache.activemq.ActiveMQXAConnectionFactory
+          xa-properties:
+            brokerURL: tcp://localhost:61616
+      datasource:
+        bookings:
+          unique-resource-name: dataSourceBilling
+          max-pool-size: 5
+          min-pool-size: 1
+          max-life-time: 20000
+          borrow-connection-timeout: 10000
+          xa-data-source-class-name: org.h2.jdbcx.JdbcDataSource
+          initialization-mode : always
+          xa-properties:
+            user: sa
+            password:
+            URL: jdbc:h2:mem:testdb
+
+        accounts:
+          unique-resource-name: dataSourceAccounts
+          max-pool-size: 5
+          min-pool-size: 1
+          max-life-time: 20000
+          borrow-connection-timeout: 10000
+          xa-data-source-class-name: org.h2.jdbcx.JdbcDataSource
+          xa-properties:
+            user: sa
+            password:
+            URL: jdbc:h2:mem:testdb
+
+
